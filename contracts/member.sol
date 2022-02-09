@@ -2,14 +2,17 @@
 
 pragma solidity >=0.7.0 <0.9.0;
 
-import "det"  //det
-import "def"  //def
+import "Detbank"  //det
+import "Def"  //def
+//Detbank 칩사용
+
 contract member {
 
     uint256 public tex;
     uint256 public sum;
     mapping(address => my) public myinfo; //어카운트 오너
-    address admin;
+    address det;
+    address def;
 
     struct my {
     uint8[2]state; //레벨 공력 방어력
@@ -21,8 +24,9 @@ contract member {
     uint8 ring;  //에메랄드
      }
 
-    constructor( )public {
-       admin=msg.sender;
+    constructor(Detbank _detbank,Def _def)public {
+       detbank=_detbank;
+       def=_deff;
        myinfo[msg.sender]state[0]=1;
        myinfo[msg.sender]state[1]=1;
        myinfo[msg.sender]state[2]=1;
@@ -33,7 +37,9 @@ contract member {
 
     function meberjoin(address memory _mento) public {
        require(myinfo[_mento]state[0]>=1);
-       require(det.msg.value==300000);  //30만 det 가입
+       require(detbank.myinfo[msg.sender]chip>=300000);  //30만 det 가입
+       detbank.chipup(2,msg.sender,0,300000,0);//fn,user,pn,mn,loan
+
        for(i=0; i<3; i++){
         myinfo[msg.sender]state[i]=1;
       }
